@@ -1,7 +1,11 @@
 export LSCOLORS="gxfxcxdxbxegedabagacad"
 export CLICOLOR=true
 
-fpath=($ZSH/zsh/functions $fpath)
+fpath=(
+	$ZSH/zsh/functions 
+	$ZSH/zsh/functions/VCS_info
+	$ZSH/zsh/functions/VCS_info/Backends
+	$fpath)
 
 autoload -U $ZSH/zsh/functions/*(:t)
 
