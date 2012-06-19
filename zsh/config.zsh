@@ -3,8 +3,8 @@ export CLICOLOR=true
 
 fpath=(
 	$ZSH/zsh/functions 
-	$ZSH/zsh/functions/VCS_info
-	$ZSH/zsh/functions/VCS_info/Backends
+	$ZSH/zsh/functions/VCS_Info
+	$ZSH/zsh/functions/VCS_Info/Backends
 	$fpath)
 
 autoload -U $ZSH/zsh/functions/*(:t)
