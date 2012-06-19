@@ -1,10 +1,4 @@
-if [[ -n $SSH_CONNECTION ]]; then
-  export PS1='%m:%3~$(git_info_for_prompt)%# '
-else
-  export PS1='%3~$(git_info_for_prompt)%# '
-fi
-
-export LSCOLORS="exfxcxdxbxegedabagacad"
+export LSCOLORS="gxfxcxdxbxegedabagacad"
 export CLICOLOR=true
 
 fpath=($ZSH/zsh/functions $fpath)
@@ -21,6 +15,7 @@ setopt NO_LIST_BEEP
 setopt LOCAL_OPTIONS # allow functions to have local options
 setopt LOCAL_TRAPS # allow functions to have local traps
 setopt HIST_VERIFY
+setopt hist_no_store
 setopt SHARE_HISTORY # share history between sessions ???
 setopt EXTENDED_HISTORY # add timestamps to history
 setopt PROMPT_SUBST
@@ -32,6 +27,15 @@ setopt APPEND_HISTORY # adds history
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
 setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
 setopt HIST_REDUCE_BLANKS
+
+setopt auto_cd
+setopt auto_menu
+setopt auto_pushd
+setopt auto_remove_slash
+setopt auto_resume
+
+setopt list_types
+
 
 # don't expand aliases _before_ completion has finished
 #   like: git comm-[tab]

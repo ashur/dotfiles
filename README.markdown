@@ -1,4 +1,4 @@
-# holman does dotfiles
+# foozmeat does dotfiles
 
 ## dotfiles
 
@@ -13,12 +13,14 @@ up into the main areas I used (Ruby, git, system libraries, and so on), so I
 structured the project accordingly.
 
 If you're interested in the philosophy behind why projects like these are
-awesome, you might want to [read my post on the
+awesome, you might want to [read this post on the
 subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
 
 ## install
 
-- `git clone git://github.com/holman/dotfiles ~/.dotfiles`
+- `brew install coreutils`
+- `brew install grc`
+- `git clone git://github.com/foozmeat/dotfiles ~/.dotfiles`
 - `cd ~/.dotfiles`
 - `rake install`
 
@@ -77,7 +79,7 @@ said, I do use this as *my* dotfiles, so there's a good chance I may break
 something if I forget to make a check for a dependency.
 
 If you're brand-new to the project and run into any blockers, please
-[open an issue](https://github.com/holman/dotfiles/issues) on this repository
+[open an issue](https://github.com/foozmeat/dotfiles/issues) on this repository
 and I'd love to get it fixed for you!
 
 ## thanks

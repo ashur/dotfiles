@@ -1,0 +1,14 @@
+#!/bin/sh
+
+FILE1=`basename $1`
+FILE2=`basename $2`
+
+HEX1="/tmp/${FILE1}-1.hex"
+HEX2="/tmp/${FILE2}-2.hex"
+
+hexdump -C "$1" > $HEX1
+hexdump -C "$2" > $HEX2
+
+diff $HEX1 $HEX2 | mate
+
+rm $HEX1 $HEX2

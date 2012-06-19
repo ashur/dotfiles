@@ -7,4 +7,8 @@ then
   alias l="gls -lAh --color"
   alias ll="gls -l --color"
   alias la='gls -A --color'
+	alias dir='ls -lFhG'
 fi
+
+alias grep='grep --color '
+alias diff='diff -r --exclude=.svn'
