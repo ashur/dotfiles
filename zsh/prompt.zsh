@@ -31,6 +31,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 #	export PS1='[%F{red}%n%F{white} @ %F{3}%m%F{white}] %F{green}%~%F{white} >'
 	export PS1="[%{$fg[red]%}%n%{$reset_color%} @ %{$fg[yellow]%}%m%{$reset_color%}] %{$fg[green]%}%1~ %{$reset_color%}>"
 else
-	export PS1="[%{$fg[red]%}%n%{$reset_color%}] %{$fg[green]%}%1~ %{$reset_color%}%#"
+	export PS1="[%{$fg[red]%}%n%{$reset_color%}] %{$fg[green]%}%1~ %{$reset_color%}>"
 	# export PS1='[%F{red}%n%F{white}] %F{green}%~%F{white} >'
 fi
