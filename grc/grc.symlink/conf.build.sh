@@ -4,7 +4,7 @@ colours=green
 .........
 # xcode messages
 regexp=^===.*===$
-colours=red
+colours=green
 .........
 # 
 regexp=\b(gcc|clang|llvm-gcc-4.2)\b
@@ -12,15 +12,15 @@ colours=yellow
 count=more
 .........
 # Xcode commands
-regexp=\b(CompileC|Analyze|PhaseScriptExecution|ProcessProductPackaging|CodeSign|CopyPNGFile|CopyStringsFile|CompileXIB).*\b
-colours=bold magenta
+regexp=\b(CompileC|Analyze|PhaseScriptExecution|ProcessProductPackaging|CodeSign|CopyPNGFile|CopyStringsFile|CompileXIB|CpResource).*\b
+colours=bold blue
 .........
 # 
 regexp=^[^:\s]*?:\d+:
 colours=bold magenta
 .........
 regexp=^[^:\s]*?:
-colours=cyan
+colours=blue
 count=once
 .........
 # 
@@ -59,3 +59,33 @@ regexp=note:
 colours=bold cyan
 count=once
 
+### SVN
+# conflict
+regexp=^C .*$
+colours=bold red
+count=more
+======
+# modified
+regexp=^M .*$
+colours=blue
+count=more
+======
+# added
+regexp=^A .*$
+colours=cyan
+count=more
+======
+# removed
+regexp=^D .*$
+colours=red
+count=more
+======
+# unlisted
+regexp=^\? .*$
+colours=bold
+count=more
+======
+# updated
+regexp=^U .*$
+colours=green
+count=more
