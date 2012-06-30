@@ -14,7 +14,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Enable subpixel font rendering on non-Apple LCDs
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
+#defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
@@ -47,10 +47,10 @@ defaults write com.apple.screencapture type -string "png"
 #defaults write com.apple.finder QuitMenuItem -bool true
 
 # Disable window animations and Get Info animations in Finder
-defaults write com.apple.finder DisableAllAnimations -bool true
+#defaults write com.apple.finder DisableAllAnimations -bool true
 
 # Show all filename extensions in Finder
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+#defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Show status bar in Finder
 defaults write com.apple.finder ShowStatusBar -bool true
@@ -87,7 +87,7 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Empty Trash securely by default
-defaults write com.apple.finder EmptyTrashSecurely -bool true
+#defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 # Enable AirDrop over Ethernet and on unsupported Macs running Lion
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
@@ -99,7 +99,7 @@ chflags nohidden ~/Library
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
 
 # Set the icon size of Dock items to 36 pixels
-defaults write com.apple.dock tilesize -int 36
+defaults write com.apple.dock tilesize -int 48
 
 # Enable spring loading for all Dock items
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
@@ -113,7 +113,7 @@ defaults write com.apple.dock show-process-indicators -bool true
 # Remove the auto-hiding Dock delay
 #defaults write com.apple.Dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0
+# defaults write com.apple.dock autohide-time-modifier -float 0
 
 # Enable the 2D Dock
 #defaults write com.apple.dock no-glass -bool true
@@ -133,7 +133,7 @@ defaults write com.apple.dock itunes-notifications -bool true
 #defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
 
 # Disable shadow in screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
+# defaults write com.apple.screencapture disable-shadow -bool true
 
 # Disable Safari’s thumbnail cache for History and Top Sites
 #defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
@@ -174,8 +174,8 @@ defaults write com.apple.iTunes disablePing -bool true
 defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
 
 # Disable send and reply animations in Mail.app
-defaults write com.apple.Mail DisableReplyAnimations -bool true
-defaults write com.apple.Mail DisableSendAnimations -bool true
+# defaults write com.apple.Mail DisableReplyAnimations -bool true
+# defaults write com.apple.Mail DisableSendAnimations -bool true
 
 # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
