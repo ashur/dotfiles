@@ -3,7 +3,7 @@ export LESSEDIT='mate -l %lm %f'
 export PAGER=less
 export LESS=-diMQsz-2
 export GREP_OPTIONS='--exclude=\*.svn\*'  
-export TOOLS=$HOME/Jenkins/tools
+export TOOLS=$HOME/Developer/Jenkins/tools
 
 if [[ -n $SSH_CONNECTION ]]; then
 	export EDITOR=nano
