@@ -17,5 +17,11 @@ function title() {
   esac
 }
 
-function settab { print -Pn "\e]1;%n@%m: %~\a" }
-function settitle { print -Pn "\e]2;%n@%m: %~\a" }
+if [[ -n $SSH_CONNECTION ]]; then
+	function settab { print -Pn "\e]1;%n@%m: %~\a" }
+	function settitle { print -Pn "\e]2;%n@%m: %~\a" }
+else
+	function settab { print -Pn "\e]1;%n: %~\a" }
+	function settitle { print -Pn "\e]2;%n: %~\a" }
+fi
+
