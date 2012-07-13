@@ -4,4 +4,5 @@ then
   source `brew --prefix`/etc/grc.bashrc
 	alias xcodebuild='colourify xcodebuild'
 	alias build='colourify build.sh'
+	alias svn='colourify svn'
 fi
