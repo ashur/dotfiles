@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 
-require 'Date'
 require 'fileutils'
 
 timeFile = ENV['HOME'] + "/.dotfiles/updater/last_update.txt"
