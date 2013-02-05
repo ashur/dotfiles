@@ -3,6 +3,6 @@ if $(grc &>/dev/null)
 then
   source `brew --prefix`/etc/grc.bashrc
 	alias xcodebuild='colourify xcodebuild'
-	alias build='colourify build.sh'
+	alias build="colourify $TOOLS/build/build.rb"
 	alias svn='colourify svn'
 fi
