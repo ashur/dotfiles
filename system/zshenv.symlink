@@ -1,18 +1,21 @@
-export EDITOR='mate_wait'
-export LESSEDIT='mate -l %lm %f'
+if [[ `uname` == 'Darwin' ]]; then
+	export LESSEDIT='mate -l %lm %f'
+	export EDITOR='mate_wait'
+	export TOOLS=$HOME/Developer/Jenkins/tools
+	export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/
+else
+	export EDITOR='nano'
+	export LESSEDIT=nano
+fi
+
 export PAGER=less
 export LESS="-F -X -R"
-#export LESS=-diMQsz-2
 export GREP_OPTIONS='--exclude=\*.svn\*'  
-export TOOLS=$HOME/Developer/Jenkins/tools
 export LANG=en_US.UTF-8
 
 if [[ -n $SSH_CONNECTION ]]; then
 	export EDITOR=nano
 	export LESSEDIT=nano
-else
-	export EDITOR='mate_wait'
-	export LESSEDIT='mate -l %lm %f'
 fi
 
 if $(npm &>/dev/null)

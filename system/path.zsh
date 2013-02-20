@@ -1,4 +1,4 @@
-export PATH="/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$ZSH/bin:/sbin:/usr/sbin:$PATH"
 
 if [[ `uname` == 'Darwin' ]]; then
 	export PATH="$PATH:$TOOLS"
