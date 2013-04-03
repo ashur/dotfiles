@@ -16,5 +16,8 @@ if (checkDate <= now)
 	puts "Checking for changes to .dotfiles"
 	Dir.chdir ENV['HOME'] + "/.dotfiles/"
 	puts `git pull`
+	puts `git submodule init`
+	puts `git submodule update`
+	
 	FileUtils.touch timeFile
 end

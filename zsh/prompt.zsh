@@ -15,13 +15,13 @@ export __GIT_PROMPT_DIR=$ZSH/git
 ## Function definitions
 
 function scm_prompt_preexec {
-
-	if [[  "$(history $HISTCMD)" =~ ".*(svn|git|hg).*" ]]; then
+	case "$(history $HISTCMD)" in
+		*svn*|*git*|*hg*)
 			SCM_PROMPT_NEEDS_UPDATE=1
-			SCM_TYPE=$match
-	fi
-
+			;;
+	esac
 }
+
 typeset -a preexec_functions
 preexec_functions+=scm_prompt_preexec
 
