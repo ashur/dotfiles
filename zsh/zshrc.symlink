@@ -20,4 +20,8 @@ autoload -U compinit
 compinit
 
 # Run updater
-$ZSH/updater/updater.rb
+if [[ -n $LINUX && -n $SSH_AUTH_SOCK ]]; then
+	$ZSH/updater/updater.rb
+elif [[ -z $LINUX ]]; then
+	$ZSH/updater/updater.rb
+fi
