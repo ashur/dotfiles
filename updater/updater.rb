@@ -3,9 +3,12 @@
 require 'fileutils'
 
 timeFile = ENV['HOME'] + "/.dotfiles/updater/last_update.txt"
+modDate = Time.now - + 60 * 60 * 25
 
-modDate = File.mtime(timeFile)
-#puts "dotFiles last updated on #{modDate}"
+if File.exists?(timeFile)
+  modDate = File.mtime(timeFile)
+  #puts "dotFiles last updated on #{modDate}"
+end
 
 now = Time.new()
 
