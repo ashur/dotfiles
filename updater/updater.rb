@@ -23,4 +23,6 @@ if (checkDate <= now)
 	puts `git submodule update`
 	
 	FileUtils.touch timeFile
+  
+  `reload!`
 end
