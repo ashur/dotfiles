@@ -1,15 +1,17 @@
 #!/usr/bin/ruby
 require 'irb/completion'
-require 'irb/ext/save-history'
 require 'rubygems'
 require 'pp'
 
 if defined?(RUBY_ENGINE) and 'macruby' == RUBY_ENGINE
 	framework 'AutomationKit'
 	require 'automaton'
+else
+	require 'irb/ext/save-history'
+	ARGV.concat [ "--readline"]
 end
 
-IRB.conf[:SAVE_HISTORY] = 1000
+IRB.conf[:SAVE_HISTORY] = 100
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
