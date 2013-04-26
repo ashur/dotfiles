@@ -6,4 +6,4 @@ else
   export PATH=~/.gems/bin:/usr/lib/ruby/gems/1.8/bin:$PATH
 fi
 
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
