@@ -6,7 +6,8 @@ fi
 
 # Put Homebrew at the head of the path
 # /usr/local/bin is also first in /etc/paths
-export PATH="/usr/local/bin:$ZSH/bin:$PATH"
+
+export PATH="/usr/local/bin:$HOME/.dotfiles/bin:$PATH"
 
 if [[ `uname` == 'Darwin' ]]; then
 	export PATH="$PATH:$TOOLS"
