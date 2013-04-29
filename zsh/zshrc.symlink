@@ -15,10 +15,6 @@ then
   source ~/.localrc
 fi
 
-# initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit
-compinit
-
 # Run updater
 if [[ -n $LINUX && -n $SSH_AUTH_SOCK ]]; then
 	$ZSH/updater/updater.rb
