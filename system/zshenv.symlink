@@ -18,8 +18,3 @@ if [[ -n $SSH_CONNECTION ]]; then
 	export EDITOR=nano
 	export LESSEDIT=nano
 fi
-
-if $(npm &>/dev/null)
-then
-	export NODE_PATH=/usr/local/lib/node_modules
-fi
