@@ -24,5 +24,5 @@ if (checkDate <= now)
 	
 	FileUtils.touch timeFile
   
-  `reload!`
+  puts "Don't forget to run reload!"
 end
