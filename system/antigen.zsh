@@ -1,5 +1,5 @@
 # Load the oh-my-zsh's library.
-antigen-lib
+antigen-use oh-my-zsh
 
 antigen-bundles <<EOBUNDLES
 
