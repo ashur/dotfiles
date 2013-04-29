@@ -10,9 +10,9 @@
 #                 and '○' all other times
 # ----------------------------------------------------------------------------
 function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    hg root >/dev/null 2>/dev/null && echo '☿' && return
-    svn info >/dev/null 2>/dev/null && echo '⚡' && return
+    # git branch >/dev/null 2>/dev/null && echo '±>' && return
+    # hg root >/dev/null 2>/dev/null && echo '☿>' && return
+    # svn info >/dev/null 2>/dev/null && echo '⚡>' && return
     echo '>'
 }
 
@@ -48,16 +48,15 @@ function svn_prompt_info {
 		fi
 		
 		# show the results
-		echo "%{$fg[blue]%}$svn_repository/$svn_branch @ $svn_version%{$reset_color%}%{$fg[yellow]%}$svn_change%{$reset_color%}"
+		echo "%{$fg[blue]%}$svn_repository%{$reset_color%}/%{$fg[green]%}$svn_branch %{$reset_color%}@ %{$fg[cyan]%}$svn_version%{$reset_color%}%{$fg[yellow]%}$svn_change%{$reset_color%}"
 		
 	fi
 }
 
 # ----------------------------------------------------------------------------
 # git prompt variables
-# depends on using Steve Losh fork of oh-my-zsh
 # ----------------------------------------------------------------------------
-ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[blue]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} [dirty]"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [untracked]"
