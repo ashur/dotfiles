@@ -1,110 +1,71 @@
-autoload -U colors && colors
-autoload -Uz vcs_info
-autoload -U add-zsh-hook
+# ----------------------------------------------------------------------------
+# Using bits from Steve Losh
+#	http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+# ----------------------------------------------------------------------------
 
-zstyle ':vcs_info:*' enable svn
-zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f'
-zstyle ':vcs_info:*' formats '%F{5}[%F{2}%b%F{5}]%f'
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
-
-setopt prompt_subst
-
-export __GIT_PROMPT_DIR=$ZSH/git
-
-
-## Function definitions
-
-function scm_prompt_preexec {
-	case "$(history $HISTCMD)" in
-		*svn*|*git*|*hg*)
-			SCM_PROMPT_NEEDS_UPDATE=1
-			;;
-	esac
-}
-
-typeset -a preexec_functions
-preexec_functions+=scm_prompt_preexec
-
-function precmd_update_scm_vars() {
-	if [ -n "$SCM_PROMPT_NEEDS_UPDATE" ] || [ -n "$ZSH_THEME_GIT_PROMPT_NOCACHE" ]; then
-		update_current_scm_vars
-		unset SCM_PROMPT_NEEDS_UPDATE
-	fi
-}
-
-add-zsh-hook chpwd chpwd_update_scm_vars
-
-function chpwd_update_scm_vars() {
-    update_current_scm_vars
-}
-
-function update_current_scm_vars() {
-    unset __CURRENT_GIT_STATUS
-
-    local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
-    _GIT_STATUS=`python ${gitstatus}`
-    __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
-	GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
-	GIT_REMOTE=$__CURRENT_GIT_STATUS[2]
-	GIT_STAGED=$__CURRENT_GIT_STATUS[3]
-	GIT_CONFLICTS=$__CURRENT_GIT_STATUS[4]
-	GIT_CHANGED=$__CURRENT_GIT_STATUS[5]
-	GIT_UNTRACKED=$__CURRENT_GIT_STATUS[6]
-	GIT_CLEAN=$__CURRENT_GIT_STATUS[7]
-}
-
+# ----------------------------------------------------------------------------
+# Shows little symbol '±' if you're currently at a git repo,
+#                     '☿' if you're currently at a hg repo,
+#                     '⚡' if you're currently at a svn repo,
+#                 and '○' all other times
+# ----------------------------------------------------------------------------
 function prompt_char {
-	git branch >/dev/null 2>/dev/null && echo '±' && return
-	hg root >/dev/null 2>/dev/null && echo '☿' && return
-	svn info >/dev/null 2>/dev/null && echo '⚡' && return
-	echo '%#'
+    git branch >/dev/null 2>/dev/null && echo '±' && return
+    hg root >/dev/null 2>/dev/null && echo '☿' && return
+    svn info >/dev/null 2>/dev/null && echo '⚡' && return
+    echo '>'
 }
 
-git_super_status() {
-	precmd_update_scm_vars
-   if [ -n "$__CURRENT_GIT_STATUS" ]; then
-	  STATUS="($GIT_BRANCH"
-	  STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
-	  if [ -n "$GIT_REMOTE" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}"
-	  fi
-	  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
-	  if [ "$GIT_STAGED" -ne "0" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
-	  fi
-	  if [ "$GIT_CONFLICTS" -ne "0" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
-	  fi
-	  if [ "$GIT_CHANGED" -ne "0" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
-	  fi
-	  if [ "$GIT_UNTRACKED" -ne "0" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
-	  fi
-	  if [ "$GIT_CLEAN" -eq "1" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
-	  fi
-	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-	  echo "$STATUS"
-	else
-		echo ${vcs_info_msg_0_}
+# ----------------------------------------------------------------------------
+# svn prompt
+# based on: https://gist.github.com/1156969 
+# with help from: http://andrewray.me/bash-prompt-builder/index.html
+# 
+# Only the root directory holds the .svn repository. We need to test each directory in the current
+# directory's path to determine if we are under Subversion control.
+# ----------------------------------------------------------------------------
+function svn_prompt_info {
+	# Set up defaults
+	local svn_branch=""
+	local svn_repository=""
+	local svn_version=""
+	local svn_change=""
+
+	# if `svn info` returns more than 1 line, we are under subversion control
+  testsvn=`svn info > /dev/null 2>&1 | wc -l`
+  if [ $testsvn -gt 1 ] ; then
+		# query svn info and parse the results
+		svn_branch=`svn info | grep '^URL:' | egrep -o '((tags|branches)/[^/]+|trunk).*' | sed -E -e 's/^(branches|tags)\///g'`
+		svn_repository=`svn info | grep '^Repository Root:' | egrep -o '(http|https|file|svn|svn+ssh)/[^/]+' | egrep -o '[^/]+$'`
+		svn_version=`svnversion -n`
+		
+		# this is the slowest test of the bunch
+		change_count=`svn status | grep "?\|\!\|M\|A" | wc -l`
+		if [ "$change_count" != "       0" ]; then
+			svn_change=" [dirty]"
+		else
+			svn_change=""
+		fi
+		
+		# show the results
+		echo "%{$fg[blue]%}$svn_repository/$svn_branch @ $svn_version%{$reset_color%}%{$fg[yellow]%}$svn_change%{$reset_color%}"
+		
 	fi
 }
 
+# ----------------------------------------------------------------------------
+# git prompt variables
+# depends on using Steve Losh fork of oh-my-zsh
+# ----------------------------------------------------------------------------
+ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[blue]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} [dirty]"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [untracked]"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-
-# Default values for the appearance of the prompt. Configure at will.
-ZSH_THEME_GIT_PROMPT_PREFIX="("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
-ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[green]%}"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}●"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}✖"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}✚"
-ZSH_THEME_GIT_PROMPT_REMOTE=""
-ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✔"
-
+# ----------------------------------------------------------------------------
+# zee prompt (ha ha)
+# ----------------------------------------------------------------------------
 directory_name(){
   echo "%{$fg[green]%}%1~ %{$reset_color%}"
 }
@@ -116,20 +77,30 @@ username() {
 machine_name() {
 	echo "%{$fg[yellow]%}%m%{$reset_color%}"
 }
-precmd() {
-	precmd_update_scm_vars
-	settab
-	settitle
-  vcs_info
-}
-
-
-# export RPS1='${vcs_info_msg_0_} '
-
-export RPS1='$(git_super_status)'
 
 if [[ -n $SSH_CONNECTION ]]; then
-	export PS1="[$(username) @ $(machine_name)] $(directory_name)>"
+	export PS1="[$(username) @ $(machine_name)] $(directory_name)$(prompt_char)"
 else
-	export PS1="[$(username)] $(directory_name)>"
+	export PS1="[$(username)] $(directory_name)$(prompt_char)"
 fi
+
+# ----------------------------------------------------------------------------
+# error prompt
+# ----------------------------------------------------------------------------
+export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o (a)bort (e)dit]? "
+
+# ----------------------------------------------------------------------------
+# rubies are red, and so my Ruby version is too
+#-----------------------------------------------------------------------------
+
+export RPS1='$(git_prompt_info)$(svn_prompt_info)'
+
+# ----------------------------------------------------------------------------
+# determine the Ruby version for the right prompt
+#-----------------------------------------------------------------------------
+function rvm_ruby_prompt {
+  ruby_version=$(~/.rvm/bin/rvm-prompt)
+  if [ -n "$ruby_version" ]; then
+    echo "$ruby_version"
+  fi
+}
