@@ -22,8 +22,6 @@ if (checkDate <= now)
 	puts `git submodule init`
 	puts `git submodule update`
 	
-  puts `antigen update`
-  
 	FileUtils.touch timeFile
   
   puts "Don't forget to run reload!"
