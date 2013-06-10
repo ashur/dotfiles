@@ -1,0 +1,5 @@
+#compdef langopen
+
+_arguments \
+"1:App Path:_directories" \
+"2:Languages:(French German Japanese Spanish Dutch Italian)"
