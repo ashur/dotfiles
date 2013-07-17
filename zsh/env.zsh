@@ -6,8 +6,6 @@ export PATH="/usr/local/bin:$HOME/.dotfiles/bin:$PATH"
 if [[ `uname` == 'Darwin' ]]; then
 	export LESSEDIT='mate -l %lm %f'
 	export EDITOR='mate_wait'
-	export TOOLS=$HOME/Developer/Jenkins/tools
-	export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/
 else
 	export EDITOR='rmate'
 	export LESSEDIT=nano
