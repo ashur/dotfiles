@@ -3,13 +3,15 @@
 
 export PATH="/usr/local/bin:$HOME/.dotfiles/bin:$PATH"
 
-if [[ `uname` == 'Darwin' ]]; then
-	export LESSEDIT='mate -l %lm %f'
-	export EDITOR='mate_wait'
-else
-	export EDITOR='rmate'
-	export LESSEDIT=nano
-fi
+# if [[ `uname` == 'Darwin' ]]; then
+#   export LESSEDIT='mate -l %lm %f'
+#   export EDITOR='mate_wait'
+# else
+#   export EDITOR='rmate'
+#   export LESSEDIT=nano
+# fi
+
+export EDITOR=nano
 
 if [[ `uname` == 'Darwin' ]]; then
 	export PATH="$PATH:$TOOLS"
