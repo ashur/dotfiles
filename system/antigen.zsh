@@ -9,6 +9,7 @@ svn
 brew
 gem
 zsh-users/zsh-history-substring-search
+robbyrussell/oh-my-zsh plugins/per-directory-history
 
 EOBUNDLES
 
