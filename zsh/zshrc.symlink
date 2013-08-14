@@ -25,8 +25,8 @@ then
 fi
 
 # Run updater
-if [[ -n $IS_LINUX && -n $SSH_AUTH_SOCK ]]; then
-	$ZSH/updater/updater.rb
-elif [[ -z $IS_LINUX ]]; then
-	$ZSH/updater/updater.rb
-fi
+# if [[ -n $IS_LINUX && -n $SSH_AUTH_SOCK ]]; then
+#   $ZSH/updater/updater.rb
+# elif [[ -z $IS_LINUX ]]; then
+#   $ZSH/updater/updater.rb
+# fi
