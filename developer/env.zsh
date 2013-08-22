@@ -1,6 +1,8 @@
 if [[ `uname` == 'Darwin' ]]; then
 	export TOOLS=$HOME/Developer/Jenkins/tools
-	export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/
+  
+  # Don't set this or switching xcodes with xcode-select will not work
+	# export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/
 fi
 
 alias build="$TOOLS/build/build.rb"
