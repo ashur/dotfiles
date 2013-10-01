@@ -16,7 +16,7 @@ export EDITOR=nano
 if [[ `uname` == 'Darwin' ]]; then
 	export PATH="$PATH:$TOOLS"
 else
-  export PATH=~/.gems/bin:/usr/lib/ruby/gems/1.8/bin:$PATH
+  export PATH=~/.gems/bin:/usr/lib/ruby/gems/1.8/bin:~/local/bin:$PATH
 fi
 
 export MANPATH="/usr/local/man:$MANPATH"
