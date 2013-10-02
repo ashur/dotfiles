@@ -31,6 +31,11 @@ ruby-install() {
 	echo "    rbenv global $VERSION"
 }
 
-export RBENV_ROOT=/usr/local/var/rbenv
+if [[ `uname` == 'Darwin' ]]; then
+  export RBENV_ROOT=/usr/local/var/rbenv
+else
+#  export RBENV_ROOT=/usr/local/var/rbenv
+  export PATH=$HOME/.rbenv/bin::$PATH
+fi
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
