@@ -1,4 +1,4 @@
-# foozmeat does dotfiles
+# ashur does dotfiles
 
 ## dotfiles
 
@@ -20,7 +20,7 @@ subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
 
 - `brew install coreutils`
 - `brew install grc`
-- `git clone git://github.com/foozmeat/dotfiles ~/.dotfiles`
+- `git clone git://github.com/ashur/dotfiles ~/.dotfiles`
 - `cd ~/.dotfiles`
 - `git submodule update --init`
 - `rake install`
