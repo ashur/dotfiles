@@ -1,31 +1,59 @@
-# Sample gitconfig
-#
-# This is a sample gitconfig. Usually we keep a lot of sensitive information
-# here (things like authentication tokens, email addresses, and so on), so this
-# file is ignored in this project's .gitignore.
-#
-# To set this up, rename this file to `gitconfig.symlink` and you'll be able to
-# install this to the correct location by running the project's main `rake`
-# task.
 [user]
-        name = Zach Holman
-        email = your@example.com
+	name = James Moore
+	email = james@panic.com
 [alias]
-        co = checkout
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-        rank-contributers = !$ZSH/bin/git-rank-contributers
-        count   = !git shortlog -sn
+	co = checkout
+	promote = !$ZSH/bin/git-promote
+	wtf     = !$ZSH/bin/git-wtf
+	rank-contributers = !$ZSH/bin/git-rank-contributers
+	count   = !git shortlog -sn
+	pullall = !git pull --rebase && git submodule update --init --recursive
+	graph = log --all --graph --decorate --oneline -n30
+  p = push
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+	
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-[core]
-        excludesfile = ~/.gitignore
-        editor = mate -w
-[apply]
-        whitespace = nowarn
+	diff = auto
+	status = auto
+	branch = auto
+	ui = true
 [github]
-        user = holman
+	user = foozmeat
+[core]
+	editor = mate -w
+	excludesfile = /Users/james/.gitignore
+[apply]
+	whitespace = nowarn
+[push]
+	default = simple
+[hub]
+	protocol = https
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = Kaleidoscope
+[difftool]
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
 [mergetool]
-        keepBackup = false
+	prompt = false
+	keepBackup = true
+[merge]
+	tool = Kaleidoscope
+[difftool "sourcetree"]
+	cmd = /Applications/Changes.app/Contents/Resources/chdiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Volumes/SourceTree/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[help]
+	autocorrect = 1
