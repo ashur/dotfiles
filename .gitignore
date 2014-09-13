@@ -3,3 +3,4 @@ git/gitconfig.symlink
 .DS_Store
 /.DS_Store
 /.rake_tasks~
+/svn/subversion.symlink/auth/

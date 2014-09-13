@@ -32,7 +32,7 @@ function svn_prompt_info {
 	local svn_change=""
 
 	# if `svn info` returns more than 1 line, we are under subversion control
-  testsvn=`svn info > /dev/null 2>&1 | wc -l`
+  testsvn=`svn info &> /dev/null | wc -l`
   if [ $testsvn -gt 1 ] ; then
 		# query svn info and parse the results
 		svn_branch=`svn info | grep '^URL:' | egrep -o '((tags|branches)/[^/]+|trunk).*' | sed -E -e 's/^(branches|tags)\///g'`
