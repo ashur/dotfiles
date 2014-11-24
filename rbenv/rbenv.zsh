@@ -34,8 +34,11 @@ ruby-install() {
 if [[ `uname` == 'Darwin' ]]; then
   export RBENV_ROOT=/usr/local/var/rbenv
 else
-#  export RBENV_ROOT=/usr/local/var/rbenv
-  export PATH=$HOME/.rbenv/bin::$PATH
+	export RBENV_ROOT=/usr/local/rbenv
+	export PATH="$RBENV_ROOT/bin:$PATH"
+#	export RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so"
+	
 fi
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
