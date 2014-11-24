@@ -5,11 +5,14 @@ antigen-bundles <<EOBUNDLES
 
 zsh-users/zsh-syntax-highlighting
 git
-svn
+svn-fast-info
 brew
 gem
+ruby
 zsh-users/zsh-history-substring-search
 Tarrasch/zsh-bd
+osx
+sudo
 
 EOBUNDLES
 
