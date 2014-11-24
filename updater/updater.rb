@@ -7,7 +7,7 @@ modDate = Time.now - + 60 * 60 * 25
 
 if File.exists?(timeFile)
   modDate = File.mtime(timeFile)
-  #puts "dotFiles last updated on #{modDate}"
+  puts "dotFiles last updated on #{modDate}"
 end
 
 now = Time.new()
@@ -22,6 +22,8 @@ if (checkDate <= now)
 	puts `git submodule init`
 	puts `git submodule update`
 	
+  puts `$ZSH/updater/antigen.sh`
+  
 	FileUtils.touch timeFile
   
   puts "Don't forget to run reload!"

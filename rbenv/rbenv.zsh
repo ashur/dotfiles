@@ -1,7 +1,7 @@
 ruby-install() {
 	
 	brew tap homebrew/versions
-	brew install ruby-build gcc43
+	brew install ruby-build
 	rehash
 	
 	local VERSION="$1"
