@@ -1,19 +1,23 @@
-# Load the oh-my-zsh's library.
-antigen-use oh-my-zsh
+# Load various lib files
+antigen bundle robbyrussell/oh-my-zsh lib/
 
-antigen-bundles <<EOBUNDLES
+antigen bundle git
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle ruby
+antigen bundle sudo
+antigen bundle svn-fast-info
 
-zsh-users/zsh-syntax-highlighting
-git
-svn-fast-info
-brew
-gem
-ruby
-zsh-users/zsh-history-substring-search
-Tarrasch/zsh-bd
-osx
-sudo
+# OS specific plugins
+if [[ $CURRENT_OS == 'OS X' ]]; then
 
-EOBUNDLES
+    antigen bundle brew
+    antigen bundle brew-cask
+    antigen bundle gem
+    antigen bundle osx
+		
+elif [[ $CURRENT_OS == 'Linux' ]]; then
+    # None so far...
 
-antigen-apply
+fi
+
