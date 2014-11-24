@@ -9,14 +9,14 @@ antigen bundle sudo
 antigen bundle svn-fast-info
 
 # OS specific plugins
-if [[ $CURRENT_OS == 'OS X' ]]; then
+if [[ $IS_MAC == 1 ]]; then
 
     antigen bundle brew
     antigen bundle brew-cask
     antigen bundle gem
     antigen bundle osx
 		
-elif [[ $CURRENT_OS == 'Linux' ]]; then
+elif [[ $IS_LINUX == 1 ]]; then
     # None so far...
 
 fi
