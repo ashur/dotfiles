@@ -9,4 +9,4 @@ alias getwell='xattr -d com.apple.quarantine'
 alias hosts="head -2 ~/.ssh/known_hosts | tail -1 > ~/.ssh/known_hosts"
 
 # Pipe my public key to my clipboard. Fuck you, pay me.
-alias pubkey="more ~/.ssh/id_dsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
