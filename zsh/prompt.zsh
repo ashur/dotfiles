@@ -66,6 +66,8 @@ function svn_prompt_info {
 # ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} [dirty]"
 # ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [untracked]"
 # ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_CACHE=1
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[red]%}"
 
 # ----------------------------------------------------------------------------
 # zee prompt (ha ha)
