@@ -3,18 +3,23 @@
 #	http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
 # ----------------------------------------------------------------------------
 
+function prompt_char {
+    echo '>'
+}
+
 # ----------------------------------------------------------------------------
 # Shows little symbol '±' if you're currently at a git repo,
 #                     '☿' if you're currently at a hg repo,
 #                     '⚡' if you're currently at a svn repo,
 #                 and '○' all other times
 # ----------------------------------------------------------------------------
-function prompt_char {
-    # git branch >/dev/null 2>/dev/null && echo '±>' && return
-    # hg root >/dev/null 2>/dev/null && echo '☿>' && return
-    # svn info >/dev/null 2>/dev/null && echo '⚡>' && return
-    echo '>'
-}
+
+# function prompt_char {
+#     git branch >/dev/null 2>/dev/null && echo '±' && return
+#     hg root >/dev/null 2>/dev/null && echo '☿' && return
+#     svn info >/dev/null 2>/dev/null && echo '⚡' && return
+#     echo '○'
+# }
 
 # ----------------------------------------------------------------------------
 # svn prompt
@@ -56,11 +61,13 @@ function svn_prompt_info {
 # ----------------------------------------------------------------------------
 # git prompt variables
 # ----------------------------------------------------------------------------
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} [dirty]"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [untracked]"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}"
+# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} [dirty]"
+# ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [untracked]"
+# ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_CACHE=1
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[red]%}"
 
 # ----------------------------------------------------------------------------
 # zee prompt (ha ha)
@@ -92,16 +99,16 @@ export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)e
 # rubies are red, and so my Ruby version is too
 #-----------------------------------------------------------------------------
 
-export RPS1='$(git_prompt_info)$(svn_prompt_info)'
+export RPS1='$(git_super_status)$(svn_prompt_info)'
 
 # ----------------------------------------------------------------------------
 # determine the Ruby version for the right prompt
 #-----------------------------------------------------------------------------
-function rvm_ruby_prompt {
-  ruby_version=$(~/.rvm/bin/rvm-prompt)
-  if [ -n "$ruby_version" ]; then
-    echo "$ruby_version"
-  fi
+function ruby_version()
+{
+	if which rbenv &> /dev/null; then
+	  rbenv version | sed -e "s/ (set.*$//"
+	fi
 }
 
 if [[ -n $SSH_CONNECTION ]]; then
