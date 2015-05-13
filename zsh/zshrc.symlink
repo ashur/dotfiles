@@ -5,15 +5,6 @@ export ZSH=$HOME/.dotfiles
 export PROJECTS=~/Developer
 export SITES=~/Sites
 
-# checks (stolen from zshuery)
-if [[ $(uname) = 'Linux' ]]; then
-    IS_LINUX=1
-fi
-
-if [[ $(uname) = 'Darwin' ]]; then
-    IS_MAC=1
-fi
-
 # source every .zsh file in this rep
 for config_file ($ZSH/**/*.zsh) source $config_file
 
@@ -25,9 +16,9 @@ then
 fi
 
 # Run updater
-if [[ -n $IS_LINUX && -n $SSH_AUTH_SOCK ]]; then
-  $ZSH/updater/updater.rb
-elif [[ -z $IS_LINUX ]]; then
-  $ZSH/updater/updater.rb
-fi
+# if [[ -n $IS_LINUX && -n $SSH_AUTH_SOCK ]]; then
+#   $ZSH/updater/updater.rb
+# elif [[ -z $IS_LINUX ]]; then
+#   $ZSH/updater/updater.rb
+# fi
 
