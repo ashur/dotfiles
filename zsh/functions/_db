@@ -1,2 +1,2 @@
 #compdef db
-_files -W $HOME/DropBox -/
+_files -W $HOME/Dropbox -/
