@@ -1,1 +1,2 @@
-alias gl1='git log --pretty=oneline'
+alias gh='git log --pretty=oneline'
+alias gs='git status '
